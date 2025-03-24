@@ -7,9 +7,7 @@ from main_app.serializers import (
     CategorySerializer,
     ProjectSerializer,
     ProjectDetailSerializer,
-    NavItemSerializer,
-    PageSerializer,
-    ContactSubmissionSerializer
+
 )
 from main_app.permissions import IsAdminUserOrReadOnly
 
