@@ -1,5 +1,6 @@
-from rest_framework import viewsets, filters, status
+from rest_framework import viewsets, filters
 from rest_framework.response import Response
+from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.decorators import api_view, action
 from django_filters.rest_framework import DjangoFilterBackend
 from main_app.models import Category, Project,ProjectImage
@@ -53,6 +54,7 @@ class ProjectImageViewSet(viewsets.ModelViewSet):
     queryset = ProjectImage.objects.all()
     serializer_class = ProjectImageSerializer
     permission_classes = [IsAdminUserOrReadOnly]
+    parser_classes = (MultiPartParser, FormParser)
 
     def perform_create(self, serializer):
         serializer.save()
