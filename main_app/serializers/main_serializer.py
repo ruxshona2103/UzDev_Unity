@@ -7,10 +7,13 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = "__all__"
 
+
 class ProjectImageSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField(required=True)
+
     class Meta:
         model = ProjectImage
-        fields = ['id', 'image', 'is_main']
+        fields = ['id', 'project', 'image', 'is_main', 'created_at']
 
 class ProjectSerializer(serializers.ModelSerializer):
     category_name = serializers.ReadOnlyField(source='category.name')
