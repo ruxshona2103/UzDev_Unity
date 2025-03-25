@@ -2,12 +2,12 @@ from rest_framework import viewsets, filters, status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, action
 from django_filters.rest_framework import DjangoFilterBackend
-from main_app.models import Category, Project, NavItem, Page, ContactSubmission
+from main_app.models import Category, Project,ProjectImage
 from main_app.serializers import (
     CategorySerializer,
     ProjectSerializer,
     ProjectDetailSerializer,
-
+    ProjectImageSerializer,
 )
 from main_app.permissions import IsAdminUserOrReadOnly
 
@@ -44,6 +44,18 @@ class ProjectViewSet(viewsets.ModelViewSet):
         featured_projects = Project.objects.filter(featured=True)
         serializer = ProjectSerializer(featured_projects, many=True)
         return Response(serializer.data)
+
+
+class ProjectImageViewSet(viewsets.ModelViewSet):
+    """
+    ViewSet for viewing and editing project images.
+    """
+    queryset = ProjectImage.objects.all()
+    serializer_class = ProjectImageSerializer
+    permission_classes = [IsAdminUserOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save()
 
 
 
