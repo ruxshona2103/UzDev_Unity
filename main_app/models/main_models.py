@@ -19,7 +19,11 @@ class Project(models.Model):
     client = models.CharField(max_length=100, blank=True, null=True)
     date = models.DateField(blank=True, null=True)
     featured = models.BooleanField(default=False)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="projects")
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.CASCADE,
+        related_name="projects"
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -28,7 +32,11 @@ class Project(models.Model):
 
 
 class ProjectImage(models.Model):
-    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name="images")
+    project = models.ForeignKey(
+        Project,
+        on_delete=models.CASCADE,
+        related_name="images"
+    )
     image = models.ImageField(upload_to="projects/")
     is_main = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
